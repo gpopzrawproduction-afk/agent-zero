@@ -1,4 +1,4 @@
-from .base import BaseAgent
+from zero_gravity_core.agents.base import BaseAgent
 from typing import Any, Dict, List
 
 
@@ -13,6 +13,9 @@ class Engineer(BaseAgent):
     - Produce structured instructions for downstream agents
     """
 
+    def __init__(self, base_dir: str = None, role: str = "engineer", system_prompt: str = None, coordinator: Any = None):
+        super().__init__(base_dir=base_dir, role=role, system_prompt=system_prompt, coordinator=coordinator)
+
     def execute(self, plan: Dict[str, Any]) -> Dict[str, Any]:
         """
         Entry point for Engineer execution.
@@ -22,24 +25,35 @@ class Engineer(BaseAgent):
 
         self.record({"input_plan": plan})
 
+        # Use LLM to convert the plan into an implementation blueprint
+        blueprint = self.execute_with_llm(plan)
+        
+        # If the result is not in the expected format, create it
+        if not isinstance(blueprint, dict) or "implementation_steps" not in blueprint:
+            blueprint = self._create_blueprint_from_plan(plan)
+
+        self.record({"blueprint": blueprint})
+
+        return blueprint
+
+    def _create_blueprint_from_plan(self, plan: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Create an implementation blueprint from a plan when LLM integration is not available.
+        """
         objective = plan.get("objective", "Unknown Objective")
         steps = plan.get("steps", [])
 
-        # -------------------------
-        # Step 1: Refine steps into implementation instructions
-        # -------------------------
+        # Refine steps into implementation instructions
         implementation_steps = self._refine_steps(steps)
 
-        # -------------------------
-        # Step 2: Annotate with reasoning and dependencies
-        # -------------------------
+        # Create the blueprint structure as specified in the system prompt
         blueprint = {
             "objective": objective,
             "implementation_steps": implementation_steps,
-            "notes": f"Structured by Engineer agent based on Architect plan"
+            "technology_stack": ["python", "zerogravity_framework"],
+            "estimated_effort": "medium",
+            "critical_path": ["1"]
         }
-
-        self.record({"blueprint": blueprint})
 
         return blueprint
 
