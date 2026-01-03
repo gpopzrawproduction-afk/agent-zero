@@ -1,3 +1,86 @@
-pytest>=8.4.2
-pytest-asyncio>=1.2.0
-pytest-mock>=3.15.1
+# ZeroGravity Development Requirements
+
+# Testing Frameworks
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+coverage==7.3.2
+hypothesis==6.88.5
+tox==4.11.3
+pytest-benchmark==4.0.0
+
+# Code Quality Tools
+black==23.11.0
+flake8==6.1.0
+isort==5.12.0
+mypy==1.7.1
+bandit==1.7.5
+vulture==2.10.1
+pylint==3.0.2
+pre-commit==3.5.0
+
+# Documentation
+mkdocs==1.5.3
+mkdocstrings[python]==0.24.0
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+pdoc==14.5.1
+
+# Development Utilities
+jupyter==1.0.0
+notebook==7.0.6
+ipython==8.17.2
+debugpy==1.8.0
+watchfiles==0.21.0
+
+# Performance Analysis
+py-spy==0.3.14
+memory-profiler==0.61.0
+line-profiler==4.1.1
+
+# Security Testing
+safety==2.4.0
+dodgy==0.2.1
+vulnerability-scanner==0.1.0
+
+# Type Checking
+types-requests==2.31.0.10
+types-setuptools==68.2.0.0
+types-PyYAML==6.0.12.12
+
+# Environment Management
+python-dotenv==1.0.0
+cookiecutter==2.4.0
+virtualenv==20.24.6
+
+# API Development
+httpie==3.2.2
+swagger-ui-bundle==0.0.9
+openapi-spec-validator==0.7.1
+
+# Database Tools
+datasets==2.15.0
+faker==19.6.2
+factory-boy==3.3.0
+
+# Monitoring and Profiling
+pyinstrument==4.6.2
+snakeviz==2.1.1
+cProfile==1.0.0
+
+# Static Analysis
+pyflakes==3.1.0
+pycodestyle==2.11.1
+pygrep-hooks==1.10.0
+
+# Git Hooks and CI/CD
+pre-commit-hooks==4.5.0
+yamllint==1.33.0
+check-manifest==0.49
+
+# Additional Dev Tools
+pip-tools==7.3.0
+twine==5.0.0
+build==0.10.0
+setuptools==68.2.2
+wheel==0.41.2
